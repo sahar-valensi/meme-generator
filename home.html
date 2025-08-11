@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ultimate Meme Generator</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav container">
+        <a class="logo" href="#home">Meme Generetor</a>
+        <ul class="menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#editor">Create Meme</a></li>
+          <li><a href="#saved">Saved</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="gallery container">
+        <h1 class="visually-hidden">Gallery</h1>
+        <div class="gallery-grid">
+        </div>
+      </section>
+    </main>
+
+    <section id="editor" hidden>
+      <canvas id="meme-canvas" width="800" height="800"></canvas>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <small>&copy; MemeGen Sprint 2 - Sahar Valensi</small>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
