@@ -1,9 +1,38 @@
 'use strict'
 console.log('[boot] MemeGen Sprint 2 (minimal)');
+/*GLOBALS*/ 
+var gImgs = [
+  { id: 1, url: '/assets/meme-img/1.jpg', title: 'Meme 1' },
+  { id: 2, url: '/assets/meme-img/2.jpg', title: 'Meme 2' },
+  { id: 3, url: '/assets/meme-img/3.jpg', title: 'Meme 3' }
+];
 
 const modal    = document.getElementById('img-modal');
 const modalImg = document.getElementById('modal-image');
 const btnClose = document.getElementById('modal-close');
+
+function onInit() {
+  initModal();
+  window.onOpenPreview  = onOpenPreview;
+  window.onClosePreview = onClosePreview;
+  window.onModalClick   = onModalClick;
+  renderGallery();
+}
+
+function renderGallery() {
+  var elGrid = document.querySelector('.gallery-grid');
+  if (!elGrid) return;
+
+  var strHtml = '';
+  for (var i = 0; i < gImgs.length; i++) {
+    var img = gImgs[i];
+    strHtml +=
+      '<article class="card">' +
+        '<img src="' + img.url + '" alt="' + (img.title || 'Meme') + '" onclick="onOpenPreview(this)">' +
+      '</article>';
+  }
+  elGrid.innerHTML = strHtml;
+}
 
 function onOpenPreview(elImg) {
   if (!elImg) return;
@@ -21,21 +50,21 @@ function onClosePreview() {
 
 function onModalClick(event) {
   if (event.target === modal) {
-    closePreview();
+    onClosePreview();
   }
 }
 
 function onKeyDown(event) {
   var isEsc = (event.key === 'Escape') || (event.keyCode === 27);
-  if (isEsc) closePreview();
+  if (isEsc) onClosePreview();
 }
 
 function initModal() {
   document.addEventListener('keydown', onKeyDown);
 }
 
-initModal();
+// initModal();
 
-window.onOpenPreview  = onOpenPreview;
-window.onClosePreview = onClosePreview;
-window.onModalClick = onModalClick;
+// window.onOpenPreview  = onOpenPreview;
+// window.onClosePreview = onClosePreview;
+// window.onModalClick = onModalClick;
