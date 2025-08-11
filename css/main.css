@@ -91,7 +91,7 @@ a {
   border: 0;
 }
 
-/* Modal (minimal) */
+/* Modal  */
 #img-modal {
   border: 0;
   padding: 0;
@@ -126,4 +126,17 @@ a {
 #modal-close:focus-visible {
   outline: none;
   background: rgba(31, 35, 43, 0.95);
+}
+
+.modal-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-actions button {
+  border: 0;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
 }
