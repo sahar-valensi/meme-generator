@@ -26,6 +26,7 @@
               src="/assets/meme-img/1.jpg"
               alt="Meme base 1"
               loading="lazy"
+              onclick="onOpenPreview(this)"
             />
           </article>
 
@@ -34,6 +35,7 @@
               src="/assets/meme-img/2.jpg"
               alt="Meme base 2"
               loading="lazy"
+              onclick="onOpenPreview(this)"
             />
           </article>
           <article class="card">
@@ -41,6 +43,7 @@
               src="/assets/meme-img/3.jpg"
               alt="Meme base 2"
               loading="lazy"
+              onclick="onOpenPreview(this)"
             />
           </article>
         </div>
@@ -50,6 +53,23 @@
     <section id="editor" hidden>
       <canvas id="meme-canvas" width="800" height="800"></canvas>
     </section>
+
+    <!-- Image Preview Modal -->
+    <dialog
+      id="img-modal"
+      aria-labelledby="img-modal-title"
+      onclick="onModalClick(event)"
+    >
+      <button
+        id="modal-close"
+        aria-label="Close preview"
+        onclick="onClosePreview()"
+      >
+        ✕
+      </button>
+      <h2 id="img-modal-title" class="visually-hidden">Image Preview</h2>
+      <img src="" alt="" id="modal-image" />
+    </dialog>
 
     <footer class="site-footer">
       <div class="container">
