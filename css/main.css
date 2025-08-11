@@ -140,3 +140,17 @@ a {
   border-radius: 10px;
   cursor: pointer;
 }
+
+/*CANVAS*/
+
+#editor {
+  padding: 16px;
+}
+
+#meme-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  background: #0f1115;
+  border-radius: 8px;
+}
