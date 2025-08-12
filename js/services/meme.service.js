@@ -1,18 +1,43 @@
-'use strict';
+"use strict";
 var gImgs = [
-  { id: 1, url: '../assets/meme-imgs/1.jpg', title: 'Meme 1' },
-  { id: 2, url: '../assets/meme-imgs/2.jpg', title: 'Meme 2' },
-  { id: 3, url: '../assets/meme-imgs/3.jpg', title: 'Meme 3' },
+  { id: 1, url: "../assets/meme-imgs/1.jpg", title: "Meme 1" },
+  { id: 2, url: "../assets/meme-imgs/2.jpg", title: "Meme 2" },
+  { id: 3, url: "../assets/meme-imgs/3.jpg", title: "Meme 3" },
 ];
 
-var gCurrImgUrl ='';
+var gMeme = {
+  selectedImgId: 5,
+  selectedLineIdx: 0,
+  lines: [{ txt: "I sometimes eat Falafel", size: 20, color: "red" }],
+};
+
+var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 };
+var gCurrImgUrl = "";
 
 function getImgs() {
   return gImgs;
 }
 
+function setImg(imgId) {
+  gMeme.selectedImgId = imgId;
+}
+
+function getMeme() {
+  return gMeme;
+}
+
+function setLineTxt(txt) {
+  gMeme.lines[gMeme.selectedLineIdx].txt = txt;
+}
+
 function setCurrImgUrl(url) {
   gCurrImgUrl = url;
+}
+
+function getImgUrlById(id) {
+  for (var i = 0; i < gImgs.length; i++)
+    if (gImgs[i].id === id) return gImgs[i].url;
+  return null;
 }
 
 function getCurrImgUrl() {

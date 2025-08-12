@@ -51,10 +51,120 @@
     </main>
 
     <section id="editor" hidden>
-      <canvas id="meme-canvas" width="500" height="500"></canvas>
+      <div class="editor-layout">
+        <canvas id="meme-canvas" width="500" height="500"></canvas>
+        <div class="toolbar" aria-label="Editor tools">
+          <div class="tool-group">
+            <input
+              class="tool-input"
+              type="text"
+              placeholder="Write your text..."
+              oninput="onTxtInput(this.value)"
+            />
+          </div>
+          <div class="tool-group">
+            <button
+              class="btn btn-icon"
+              title="Switch line up"
+              onclick="onSwitchLine('up')"
+            >
+              ↕
+            </button>
+            <button class="btn btn-icon" title="Add line" onclick="onAddLine()">
+              ＋
+            </button>
+            <button
+              class="btn btn-icon"
+              title="Delete line"
+              onclick="onDeleteLine()"
+            >
+              🗑️
+            </button>
+          </div>
+          <div class="tool-group">
+            <button class="btn" title="Font size up" onclick="onFontInc()">
+              A+
+            </button>
+            <button class="btn" title="Font size down" onclick="onFontDec()">
+              A-
+            </button>
+
+            <button
+              class="btn btn-icon"
+              title="Align left"
+              onclick="onAlignLeft()"
+            >
+              ≡
+            </button>
+            <button
+              class="btn btn-icon"
+              title="Align center"
+              onclick="onAlignCenter()"
+            >
+              ≣
+            </button>
+            <button
+              class="btn btn-icon"
+              title="Align right"
+              onclick="onAlignRight()"
+            >
+              ≡
+            </button>
+          </div>
+          <div class="tool-group">
+            <select class="tool-select" onchange="onSetFont(this.value)">
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Lato">Lato</option>
+            </select>
+
+            <button
+              class="btn"
+              title="Toggle Stroke"
+              onclick="onToggleStroke()"
+            >
+              A⟂
+            </button>
+
+            <label class="color">
+              <span>Fill</span>
+              <input
+                type="color"
+                value="#ffffff"
+                onchange="onSetFillColor(this.value)"
+              />
+            </label>
+
+            <label class="color">
+              <span>Stroke</span>
+              <input
+                type="color"
+                value="#000000"
+                onchange="onSetStrokeColor(this.value)"
+              />
+            </label>
+          </div>
+          <div class="tool-group stickers">
+            <button class="btn btn-icon" title="Prev" onclick="onStickerPrev()">
+              ❮
+            </button>
+            <div class="sticker-track">
+              <button class="sticker" onclick="onAddSticker('🎁')">🎁</button>
+              <button class="sticker" onclick="onAddSticker('👒')">👒</button>
+              <button class="sticker" onclick="onAddSticker('🥸')">🥸</button>
+            </div>
+            <button class="btn btn-icon" title="Next" onclick="onStickerNext()">
+              ❯
+            </button>
+          </div>
+          <div class="tool-actions">
+            <button class="btn btn-primary" onclick="onShare()">Share</button>
+            <button class="btn" onclick="onDownload()">Download</button>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Image Preview Modal -->
     <dialog
       id="img-modal"
       aria-labelledby="img-modal-title"

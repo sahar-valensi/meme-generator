@@ -29,16 +29,42 @@ function renderGallery() {
       '<article class="card">' +
       '<img src="' +
       img.url +
-      '" alt="' +
-      (img.title || "Meme") +
+      '" alt="meme" data-id="' +
+      img.id +
       '" onclick="onOpenPreview(this)">' +
       "</article>";
   }
   elGrid.innerHTML = strHtml;
 }
 
+function renderMeme() {
+  var meme = getMeme();
+  if (!meme || !gElCanvas) return;
+
+  var url = getImgUrlById(meme.selectedImgId);
+  if (!url) return;
+
+  var img = new Image();
+  img.onload = function () {
+    var cw = gElCanvas.width,
+      ch = gElCanvas.height;
+    gCtx.clearRect(0, 0, cw, ch);
+
+    var rect = getContainRect(img.width, img.height, cw, ch);
+    gCtx.drawImage(img, rect.x, rect.y, rect.w, rect.h);
+
+    var line = meme.lines[0];
+    var x = Math.round(cw / 2);
+    var y = Math.round(ch * 0.15);
+    drawText(line.txt, x, y, line);
+  };
+  img.src = url;
+}
+
 function onOpenPreview(elImg) {
   if (!elImg) return;
+  var id = +elImg.getAttribute("data-id");
+  if (id) setImg(id);
 
   setCurrImgUrl(elImg.src);
   modalImg.src = elImg.src;
@@ -51,6 +77,7 @@ function onOpenPreview(elImg) {
 function onClosePreview() {
   modal.close();
 }
+
 function onOpenEditor() {
   onClosePreview();
 
@@ -60,6 +87,13 @@ function onOpenEditor() {
   if (elHome) elHome.hidden = true;
   if (elEditor) elEditor.hidden = false;
 
+  if (!gElCanvas) {
+    gElCanvas = document.getElementById("meme-canvas");
+    if (!gElCanvas) return;
+    gCtx = gElCanvas.getContext("2d");
+  }
+
+  renderMeme();
   initEditor();
 }
 
@@ -103,6 +137,22 @@ function drawBaseImage() {
     gCtx.drawImage(img, rect.x, rect.y, rect.w, rect.h);
   };
   img.src = src;
+}
+
+function drawText(txt, x, y, line) {
+  gCtx.lineWidth = 2;
+  gCtx.font = (line.size || 20) + 'px Impact, Arial';
+  gCtx.textAlign = line.align || 'center';
+  gCtx.textBaseline = 'middle';
+  gCtx.fillStyle = line.color || 'red';
+  gCtx.strokeStyle = '#000000';
+  gCtx.fillText(txt || '', x, y);
+  gCtx.strokeText(txt || '', x, y);
+}
+
+function onTxtInput(val) {
+  setLineTxt(val); 
+  renderMeme();
 }
 
 function getContainRect(iw, ih, cw, ch) {
