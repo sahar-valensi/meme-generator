@@ -1,12 +1,6 @@
 "use strict";
 console.log("[boot] MemeGen Sprint 2 (minimal)");
 /*GLOBALS*/
-var gImgs = [
-  { id: 1, url: "../assets/meme-img/1.jpg", title: "Meme 1" },
-  { id: 2, url: "../assets/meme-img/2.jpg", title: "Meme 2" },
-  { id: 3, url: "../assets/meme-img/3.jpg", title: "Meme 3" },
-];
-var gCurrImgUrl = "";
 var gElCanvas;
 var gCtx;
 
@@ -27,9 +21,10 @@ function renderGallery() {
   var elGrid = document.querySelector(".gallery-grid");
   if (!elGrid) return;
 
+  var imgs = getImgs();
   var strHtml = "";
-  for (var i = 0; i < gImgs.length; i++) {
-    var img = gImgs[i];
+  for (var i = 0; i < imgs.length; i++) {
+    var img = imgs[i];
     strHtml +=
       '<article class="card">' +
       '<img src="' +
@@ -45,7 +40,7 @@ function renderGallery() {
 function onOpenPreview(elImg) {
   if (!elImg) return;
 
-  gCurrImgUrl = elImg.src;
+  setCurrImgUrl(elImg.src);
   modalImg.src = elImg.src;
   modalImg.alt = elImg.alt || "";
 
@@ -94,7 +89,7 @@ function initEditor() {
 }
 
 function drawBaseImage() {
-  var src = gCurrImgUrl || (gImgs[0] && gImgs[0].url);
+  var src = getCurrImgUrl() || (getImgs()[0] && getImgs()[0].url);
   if (!src) return;
 
   var img = new Image();
