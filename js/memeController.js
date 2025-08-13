@@ -53,17 +53,19 @@ function renderMeme() {
     var rect = getContainRect(img.width, img.height, cw, ch);
     gCtx.drawImage(img, rect.x, rect.y, rect.w, rect.h);
 
-    var line = meme.lines[meme.selectedLineIdx] ||
-      meme.lines[0] || { txt: "", size: 20, color: "red", align: "center" };
-    var x =
-      line.align === "left"
-        ? 20
-        : line.align === "right"
-        ? cw - 20
-        : Math.round(cw / 2);
-    var y = Math.round(ch * 0.15);
-    
-    drawText(line.txt, x, y, line);
+    for (var i = 0; i < meme.lines.length; i++) {
+      var line = meme.lines[i] ||
+         { txt: "", size: 20, color: "red", align: "center" };
+      var x =
+        line.align === "left"
+          ? 20
+          : line.align === "right"
+          ? cw - 20
+          : Math.round(cw / 2);
+      var y =  getLineY(i, ch);
+
+      drawText(line.txt, x, y, line);
+    }
   };
   img.src = url;
 }
@@ -191,5 +193,24 @@ function onAlignCenter() {
 }
 function onAlignRight() {
   setAlign("right");
+  renderMeme();
+}
+
+function onAddLine() {
+  addLine("");
+  _syncInputWithCurrentLine();
+  renderMeme();
+}
+
+function onDeleteLine() {
+  deleteLine();
+  _clearInput()
+  _syncInputWithCurrentLine();
+  renderMeme();
+}
+
+function onSwitchLine(dir) {
+  switchLine(dir);
+  _syncInputWithCurrentLine();
   renderMeme();
 }
