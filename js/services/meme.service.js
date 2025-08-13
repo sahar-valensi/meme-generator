@@ -57,3 +57,10 @@ function changeFontSize(diff) {
 
   line.size = size;
 }
+
+function setAlign(align) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+  line.align = align;      
+}

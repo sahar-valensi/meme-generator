@@ -53,9 +53,16 @@ function renderMeme() {
     var rect = getContainRect(img.width, img.height, cw, ch);
     gCtx.drawImage(img, rect.x, rect.y, rect.w, rect.h);
 
-    var line = meme.lines[0];
-    var x = Math.round(cw / 2);
+    var line = meme.lines[meme.selectedLineIdx] ||
+      meme.lines[0] || { txt: "", size: 20, color: "red", align: "center" };
+    var x =
+      line.align === "left"
+        ? 20
+        : line.align === "right"
+        ? cw - 20
+        : Math.round(cw / 2);
     var y = Math.round(ch * 0.15);
+    
     drawText(line.txt, x, y, line);
   };
   img.src = url;
@@ -141,17 +148,17 @@ function drawBaseImage() {
 
 function drawText(txt, x, y, line) {
   gCtx.lineWidth = 2;
-  gCtx.font = (line.size || 20) + 'px Impact, Arial';
-  gCtx.textAlign = line.align || 'center';
-  gCtx.textBaseline = 'middle';
-  gCtx.fillStyle = line.color || 'red';
-  gCtx.strokeStyle = '#000000';
-  gCtx.fillText(txt || '', x, y);
-  gCtx.strokeText(txt || '', x, y);
+  gCtx.font = (line.size || 20) + "px Impact, Arial";
+  gCtx.textAlign = line.align || "center";
+  gCtx.textBaseline = "middle";
+  gCtx.fillStyle = line.color || "red";
+  gCtx.strokeStyle = "#000000";
+  gCtx.fillText(txt || "", x, y);
+  gCtx.strokeText(txt || "", x, y);
 }
 
 function onTxtInput(val) {
-  setLineTxt(val); 
+  setLineTxt(val);
   renderMeme();
 }
 
@@ -171,5 +178,18 @@ function onFontInc() {
 
 function onFontDec() {
   changeFontSize(-2);
+  renderMeme();
+}
+
+function onAlignLeft() {
+  setAlign("left");
+  renderMeme();
+}
+function onAlignCenter() {
+  setAlign("center");
+  renderMeme();
+}
+function onAlignRight() {
+  setAlign("right");
   renderMeme();
 }
