@@ -126,6 +126,26 @@ function getLineY(idx, ch) {
   if (idx === 1) return Math.round(ch * 0.85);
   return Math.round(ch * 0.5 + (idx - 2) * 40);
 }
+function setFillColor(color) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+  line.color = color;
+}
+
+function setStrokeColor(color) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+  line.stroke = color;
+}
+
+function toggleStroke() {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+  line.hasStroke = line.hasStroke === false ? true : false;
+}
 
 function _syncInputWithCurrentLine() {
   var meme = getMeme();

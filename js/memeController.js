@@ -54,15 +54,19 @@ function renderMeme() {
     gCtx.drawImage(img, rect.x, rect.y, rect.w, rect.h);
 
     for (var i = 0; i < meme.lines.length; i++) {
-      var line = meme.lines[i] ||
-         { txt: "", size: 20, color: "red", align: "center" };
+      var line = meme.lines[i] || {
+        txt: "",
+        size: 20,
+        color: "red",
+        align: "center",
+      };
       var x =
         line.align === "left"
           ? 20
           : line.align === "right"
           ? cw - 20
           : Math.round(cw / 2);
-      var y =  getLineY(i, ch);
+      var y = getLineY(i, ch);
 
       drawText(line.txt, x, y, line);
     }
@@ -149,14 +153,24 @@ function drawBaseImage() {
 }
 
 function drawText(txt, x, y, line) {
+  line = line || {};
+
   gCtx.lineWidth = 2;
   gCtx.font = (line.size || 20) + "px Impact, Arial";
   gCtx.textAlign = line.align || "center";
   gCtx.textBaseline = "middle";
+
+  gCtx.lineJoin = "round";
+  gCtx.miterLimit = 2;
+
+  if (line.hasStroke !== false) {
+    gCtx.lineWidth = line.strokeWidth || 6;
+    gCtx.strokeStyle = line.stroke || "#ffffffff";
+    gCtx.strokeText(txt || "", x, y);
+  }
+
   gCtx.fillStyle = line.color || "red";
-  gCtx.strokeStyle = "#000000";
   gCtx.fillText(txt || "", x, y);
-  gCtx.strokeText(txt || "", x, y);
 }
 
 function onTxtInput(val) {
@@ -204,7 +218,7 @@ function onAddLine() {
 
 function onDeleteLine() {
   deleteLine();
-  _clearInput()
+  _clearInput();
   _syncInputWithCurrentLine();
   renderMeme();
 }
@@ -212,5 +226,18 @@ function onDeleteLine() {
 function onSwitchLine(dir) {
   switchLine(dir);
   _syncInputWithCurrentLine();
+  renderMeme();
+}
+
+function onSetFillColor(color) {
+  setFillColor(color);
+  renderMeme();
+}
+function onSetStrokeColor(color) {
+  setStrokeColor(color);
+  renderMeme();
+}
+function onToggleStroke() {
+  toggleStroke();
   renderMeme();
 }
