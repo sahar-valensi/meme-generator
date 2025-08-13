@@ -163,8 +163,13 @@ function getContainRect(iw, ih, cw, ch) {
   var y = Math.round((ch - h) / 2);
   return { x: x, y: y, w: w, h: h };
 }
-// initModal();
 
-// window.onOpenPreview  = onOpenPreview;
-// window.onClosePreview = onClosePreview;
-// window.onModalClick = onModalClick;
+function onFontInc() {
+  changeFontSize(+2);
+  renderMeme();
+}
+
+function onFontDec() {
+  changeFontSize(-2);
+  renderMeme();
+}

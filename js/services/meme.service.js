@@ -43,3 +43,17 @@ function getImgUrlById(id) {
 function getCurrImgUrl() {
   return gCurrImgUrl;
 }
+
+/*TOOLBAR */
+function changeFontSize(diff) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+
+  var size = line.size || 20;
+  size += diff;
+  // if (size < 10)  size = 10;
+  // if (size > 120) size = 120;
+
+  line.size = size;
+}

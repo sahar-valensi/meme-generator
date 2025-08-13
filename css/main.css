@@ -214,7 +214,7 @@ a {
   transition: transform 0.05s ease, background 0.15s ease;
 }
 .btn:hover {
-  background: #f3f4f6;
+  background: #1b4599;
 }
 .btn:active {
   transform: translateY(1px);
@@ -229,7 +229,7 @@ a {
 }
 
 .btn-primary {
-  background: #ff8a00; /* כתום נחמד */
+  background: #ff8a00; 
   border-color: #ff8a00;
   color: #fff;
 }
