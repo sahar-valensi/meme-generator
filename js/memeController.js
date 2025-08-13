@@ -70,6 +70,11 @@ function renderMeme() {
 
       drawText(line.txt, x, y, line);
     }
+    if (meme.stickers && meme.stickers.length) {
+      for (var s = 0; s < meme.stickers.length; s++) {
+        drawSticker(meme.stickers[s]);
+      }
+    }
   };
   img.src = url;
 }
@@ -107,6 +112,7 @@ function onOpenEditor() {
   }
 
   renderMeme();
+  renderStickerTrack();
   // initEditor();
 }
 
@@ -269,4 +275,51 @@ function onStrokeInc() {
 function onStrokeDec() {
   changeStrokeWidth(-1);
   renderMeme();
+}
+/*STICKERS */
+function renderStickerTrack() {
+  var elTrack = document.querySelector(".sticker-track");
+  if (!elTrack) return;
+  var stickers = getStickersPage();
+  var html = "";
+  for (var i = 0; i < stickers.length; i++) {
+    html +=
+      '<button class="sticker" onclick="onAddSticker(\'' +
+      stickers[i] +
+      "')\">" +
+      stickers[i] +
+      "</button>";
+  }
+  elTrack.innerHTML = html;
+}
+function onStickerPrev() {
+  stickerPrev();
+  renderStickerTrack();
+}
+function onStickerNext() {
+  stickerNext();
+  renderStickerTrack();
+}
+
+function onAddSticker(sym) {
+  if (!gElCanvas) return;
+  var cw = gElCanvas.width;
+  var ch = gElCanvas.height;
+
+var count = (getMeme().stickers ? getMeme().stickers.length : 0);
+
+var x = Math.round(cw / 2) + ((count * 60) % 360) - 180;
+var y = Math.round(ch / 2) + ((count * 36) % 360) - 180;
+
+addSticker(sym, x, y, 64);
+renderMeme();
+}
+
+function drawSticker(st) {
+  if (!st || !st.sym) return;
+  var size = st.size || 60;
+  gCtx.font = size + 'px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
+  gCtx.textAlign = 'center';
+  gCtx.textBaseline = 'middle';
+  gCtx.fillText(st.sym, st.x, st.y);
 }

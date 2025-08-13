@@ -14,6 +14,24 @@ var gMeme = {
 var gKeywordSearchCountMap = { funny: 12, cat: 16, baby: 2 };
 var gCurrImgUrl = "";
 
+var gStickers = [
+  "😂",
+  "😎",
+  "🔥",
+  "👍",
+  "❤️",
+  "💯",
+  "🎉",
+  "👑",
+  "🐱",
+  "🥳",
+  "💣",
+  "👅",
+  "✨",
+];
+var gStickerPageIdx = 0;
+var STICKERS_PER_PAGE = 3;
+
 function getImgs() {
   return gImgs;
 }
@@ -160,13 +178,32 @@ function changeStrokeWidth(diff) {
   if (!line) return;
 
   var w = Number(line.strokeWidth);
-  if (!w) w = 8; 
+  if (!w) w = 8;
   w += diff;
 
-  if (w < 1) w = 1; 
+  if (w < 1) w = 1;
   if (w > 30) w = 30;
 
   line.strokeWidth = w;
+}
+/*STICKERS */
+function getStickersPage() {
+  var out = [];
+  for (var i = 0; i < STICKERS_PER_PAGE; i++) {
+    var idx = (gStickerPageIdx + i) % gStickers.length;
+    out.push(gStickers[idx]);
+  }
+  return out;
+}
+function stickerPrev() {
+  gStickerPageIdx = (gStickerPageIdx - 1 + gStickers.length) % gStickers.length;
+}
+function stickerNext() {
+  gStickerPageIdx = (gStickerPageIdx + 1) % gStickers.length;
+}
+function addSticker(sym, x, y, size) {
+  if (!gMeme.stickers) gMeme.stickers = [];
+  gMeme.stickers.push({ sym: sym, x: x, y: y, size: size || 64 });
 }
 
 function _syncInputWithCurrentLine() {
