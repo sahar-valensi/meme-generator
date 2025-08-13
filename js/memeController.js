@@ -306,20 +306,41 @@ function onAddSticker(sym) {
   var cw = gElCanvas.width;
   var ch = gElCanvas.height;
 
-var count = (getMeme().stickers ? getMeme().stickers.length : 0);
+  var count = getMeme().stickers ? getMeme().stickers.length : 0;
 
-var x = Math.round(cw / 2) + ((count * 60) % 360) - 180;
-var y = Math.round(ch / 2) + ((count * 36) % 360) - 180;
+  var x = Math.round(cw / 2) + ((count * 60) % 360) - 180;
+  var y = Math.round(ch / 2) + ((count * 36) % 360) - 180;
 
-addSticker(sym, x, y, 64);
-renderMeme();
+  addSticker(sym, x, y, 64);
+  renderMeme();
 }
 
 function drawSticker(st) {
   if (!st || !st.sym) return;
   var size = st.size || 60;
-  gCtx.font = size + 'px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
-  gCtx.textAlign = 'center';
-  gCtx.textBaseline = 'middle';
+  gCtx.font =
+    size +
+    'px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';
+  gCtx.textAlign = "center";
+  gCtx.textBaseline = "middle";
   gCtx.fillText(st.sym, st.x, st.y);
+}
+/*SHARE */
+function onShareFacebook() {
+  var meme = getMeme && getMeme();
+  var txt =
+    (meme &&
+      meme.lines &&
+      meme.lines[meme.selectedLineIdx] &&
+      meme.lines[meme.selectedLineIdx].txt) ||
+    "";
+  var shareUrl = location && location.href ? location.href.split("#")[0] : "";
+  var fbUrl =
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(shareUrl);
+    
+  if (txt) fbUrl += "&quote=" + encodeURIComponent(txt);
+  fbUrl += "&hashtag=" + encodeURIComponent("#MemeGenerator");
+  
+  window.open(fbUrl, "_blank", "noopener,noreferrer,width=680,height=640");
 }
