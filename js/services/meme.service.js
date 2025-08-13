@@ -34,7 +34,7 @@ function setLineTxt(txt) {
       txt: "",
       size: 20,
       color: "red",
-      stroke: "#000000",
+      stroke: "#ffffffff",
       align: "center",
     };
     gMeme.lines[idx] = line;
@@ -62,7 +62,7 @@ function changeFontSize(diff) {
   var line = gMeme.lines[idx];
   if (!line) return;
 
-  var size = line.size || 20;
+  var size = +line.size || 20;
   size += diff;
   // if (size < 10)  size = 10;
   // if (size > 120) size = 120;
@@ -147,6 +147,14 @@ function toggleStroke() {
   line.hasStroke = line.hasStroke === false ? true : false;
 }
 
+function setFont(family) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+  line.font = String(family); 
+}
+
+
 function _syncInputWithCurrentLine() {
   var meme = getMeme();
   var elInput = document.querySelector(".tool-input");
@@ -158,4 +166,11 @@ function _syncInputWithCurrentLine() {
 function _clearInput() {
   var elInput = document.querySelector(".tool-input");
   if (elInput) elInput.value = "";
+}
+
+
+function _syncFontSelect() {
+  var line = getCurrLine && getCurrLine();
+  var elSel = document.querySelector('.tool-select');
+  if (elSel) elSel.value = (line && line.font) || 'Impact';
 }
