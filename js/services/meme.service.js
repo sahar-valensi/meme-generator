@@ -151,9 +151,23 @@ function setFont(family) {
   var idx = gMeme.selectedLineIdx;
   var line = gMeme.lines[idx];
   if (!line) return;
-  line.font = String(family); 
+  line.font = String(family);
 }
 
+function changeStrokeWidth(diff) {
+  var idx = gMeme.selectedLineIdx;
+  var line = gMeme.lines[idx];
+  if (!line) return;
+
+  var w = Number(line.strokeWidth);
+  if (!w) w = 8; 
+  w += diff;
+
+  if (w < 1) w = 1; 
+  if (w > 30) w = 30;
+
+  line.strokeWidth = w;
+}
 
 function _syncInputWithCurrentLine() {
   var meme = getMeme();
@@ -168,9 +182,8 @@ function _clearInput() {
   if (elInput) elInput.value = "";
 }
 
-
 function _syncFontSelect() {
   var line = getCurrLine && getCurrLine();
-  var elSel = document.querySelector('.tool-select');
-  if (elSel) elSel.value = (line && line.font) || 'Impact';
+  var elSel = document.querySelector(".tool-select");
+  if (elSel) elSel.value = (line && line.font) || "Impact";
 }

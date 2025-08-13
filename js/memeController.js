@@ -157,7 +157,7 @@ function drawText(txt, x, y, line) {
 
   gCtx.lineWidth = 2;
 
-  var family = (line.font && String(line.font).trim()|| 'Impact, Arial');
+  var family = (line.font && String(line.font).trim()) || "Impact, Arial";
   gCtx.font = (line.size || 30) + "px " + family;
   gCtx.textAlign = line.align || "center";
   gCtx.textBaseline = "middle";
@@ -166,7 +166,7 @@ function drawText(txt, x, y, line) {
   gCtx.miterLimit = 2;
 
   if (line.hasStroke !== false) {
-    gCtx.lineWidth = line.strokeWidth || 6;
+    gCtx.lineWidth = line.strokeWidth || 8;
     gCtx.strokeStyle = line.stroke || "#ffffffff";
     gCtx.strokeText(txt || "", x, y);
   }
@@ -190,7 +190,7 @@ function getContainRect(iw, ih, cw, ch) {
 }
 /*CHANGE FONT SIZE */
 function onFontInc() {
-  console.log("font increace")
+  console.log("font increace");
   changeFontSize(+2);
   renderMeme();
 }
@@ -216,7 +216,7 @@ function onAlignRight() {
 function onAddLine() {
   addLine("");
   _syncInputWithCurrentLine();
-  _syncFontSelect()
+  _syncFontSelect();
   renderMeme();
 }
 
@@ -224,14 +224,14 @@ function onDeleteLine() {
   deleteLine();
   _clearInput();
   _syncInputWithCurrentLine();
-  _syncFontSelect()
+  _syncFontSelect();
   renderMeme();
 }
 
 function onSwitchLine(dir) {
   switchLine(dir);
   _syncInputWithCurrentLine();
-  _syncFontSelect()
+  _syncFontSelect();
   renderMeme();
 }
 /*COLORS */
@@ -250,14 +250,23 @@ function onToggleStroke() {
 /*DOWNLOAD */
 function onDownload() {
   if (!gElCanvas) return;
-  
-  var link = document.createElement('a');
-  link.download = 'meme.png';
-  link.href = gElCanvas.toDataURL('image/png');
+
+  var link = document.createElement("a");
+  link.download = "meme.png";
+  link.href = gElCanvas.toDataURL("image/png");
   link.click();
 }
 /*CHANGE FONT FAMILY */
 function onSetFont(family) {
   setFont(family);
+  renderMeme();
+}
+
+function onStrokeInc() {
+  changeStrokeWidth(+1);
+  renderMeme();
+}
+function onStrokeDec() {
+  changeStrokeWidth(-1);
   renderMeme();
 }

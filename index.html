@@ -80,6 +80,8 @@
             >
               🗑️
             </button>
+            <button class="btn" onclick="onStrokeInc()">Outline +</button>
+            <button class="btn" onclick="onStrokeDec()">Outline −</button>
           </div>
           <div class="tool-group">
             <button class="btn" title="Font size up" onclick="onFontInc()">
@@ -127,7 +129,7 @@
             </button>
 
             <label class="color">
-              <span>Fill</span>
+              <span class="fill">Fill</span>
               <input
                 type="color"
                 value="#ffffff"
@@ -136,7 +138,7 @@
             </label>
 
             <label class="color">
-              <span>Stroke</span>
+              <span class="stroke">Stroke</span>
               <input
                 type="color"
                 value="#000000"
