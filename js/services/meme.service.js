@@ -74,6 +74,18 @@ function getCurrImgUrl() {
   return gCurrImgUrl;
 }
 
+function appendImgsUpTo(maxId) {
+  var basePath = 'assets/meme-imgs/';
+  var lastId = 0;
+
+  for (var i = 0; i < gImgs.length; i++) {
+    if (gImgs[i].id > lastId) lastId = gImgs[i].id;
+  }
+  for (var id = lastId + 1; id <= maxId; id++) {
+    gImgs.push({ id: id, url: basePath + id + ".jpg", keywords: [] });
+  }
+}
+
 /*TOOLBAR */
 function changeFontSize(diff) {
   var idx = gMeme.selectedLineIdx;

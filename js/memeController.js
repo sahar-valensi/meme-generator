@@ -14,6 +14,9 @@ function onInit() {
   window.onClosePreview = onClosePreview;
   window.onModalClick = onModalClick;
   window.onOpenEditor = onOpenEditor;
+  document.addEventListener("keydown", onKeyDown);
+
+  appendImgsUpTo(40);
   renderGallery();
 }
 
@@ -194,6 +197,11 @@ function getContainRect(iw, ih, cw, ch) {
   var y = Math.round((ch - h) / 2);
   return { x: x, y: y, w: w, h: h };
 }
+
+function onAddImages(maxId) {
+  appendImgsUpTo(maxId);
+  renderGallery();
+}
 /*CHANGE FONT SIZE */
 function onFontInc() {
   console.log("font increace");
@@ -338,9 +346,9 @@ function onShareFacebook() {
   var fbUrl =
     "https://www.facebook.com/sharer/sharer.php?u=" +
     encodeURIComponent(shareUrl);
-    
+
   if (txt) fbUrl += "&quote=" + encodeURIComponent(txt);
   fbUrl += "&hashtag=" + encodeURIComponent("#MemeGenerator");
-  
+
   window.open(fbUrl, "_blank", "noopener,noreferrer,width=680,height=640");
 }
