@@ -1,0 +1,55 @@
+.gallery {
+  padding: var(--space-5) 0 var(--space-6);
+  background: linear-gradient(180deg, var(--tint-accent), transparent 40%);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-3);
+}
+
+.card {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  overflow: hidden;
+  padding: var(--space-2);
+}
+
+.card:hover {
+  border-color: var(--border-primary);
+  box-shadow: 0 0 0 1px var(--border-primary), 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: var(--radius-1);
+}
+
+.card.upload {
+  cursor: pointer;
+  border:1px dashed var(--border-accent);
+}
+
+.card.upload:hover{
+  background: rgba(245,158,11,.08);
+  border-color: var(--color-accent);
+}
+
+.card.upload .upload-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 160px;
+  width: 100%;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.card.upload .upload-icon {
+  font-size: 1.4em;
+}

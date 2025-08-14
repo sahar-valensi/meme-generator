@@ -3,13 +3,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ultimate Meme Generator</title>
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body onload="onInit()">
     <header class="site-header">
-      <nav class="nav container">
-        <a class="logo" href="#home">Meme Generetor</a>
-        <ul class="menu">
+      <nav class="nav container flex justify-between items-center">
+        <a class="logo" href="#home" onclick="onNav('home')">Meme Generetor</a>
+        <ul class="main-nav flex gap-3">
           <li><a href="#home" onclick="onNav('home')">Home</a></li>
           <li><a href="#editor" onclick="onNav('editor')">Create Meme</a></li>
           <li><a href="#saved" onclick="onNav('saved')">Saved</a></li>
@@ -58,11 +58,11 @@
       </section>
     </main>
 
-    <section id="editor" hidden>
-      <div class="editor-layout">
+    <section id="editor" class="container" hidden>
+      <div class="editor-layout gap-4">
         <canvas id="meme-canvas" width="500" height="500"></canvas>
         <div class="toolbar" aria-label="Editor tools">
-          <div class="tool-group">
+          <div class="tool-group gap-2 wrap">
             <input
               class="tool-input"
               type="text"
@@ -70,7 +70,7 @@
               oninput="onTxtInput(this.value)"
             />
           </div>
-          <div class="tool-group">
+          <div class="tool-group gap-2 wrap">
             <button
               class="btn btn-icon"
               title="Switch line up"
@@ -163,7 +163,7 @@
               ❯
             </button>
           </div>
-          <div class="tool-actions">
+          <div class="tool-actions flex gap-2 wrap mt-2">
             <button class="btn btn-primary" onclick="onShareFacebook()">
               Share
             </button>
@@ -174,7 +174,7 @@
       </div>
     </section>
 
-    <section id="saved" class="saved-container" hidden>
+    <section id="saved" class="saved-container container" hidden>
       <h1 class="visually-hidden">Saved</h1>
       <div class="gallery-grid saved-grid"></div>
     </section>
@@ -194,7 +194,7 @@
       <h2 id="img-modal-title" class="visually-hidden">Image Preview</h2>
       <img src="" alt="" id="modal-image" />
       <div class="modal-actions">
-        <button type="button" onclick="onOpenEditor()">editor</button>
+        <button type="button" class="btn btn-secondary round-1" onclick="onOpenEditor()">editor</button>
       </div>
     </dialog>
 

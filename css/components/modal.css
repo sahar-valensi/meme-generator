@@ -1,0 +1,56 @@
+#img-modal {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  position: relative;
+}
+
+#img-modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+#modal-image {
+  display: block;
+  max-width: min(90vw, 900px);
+  max-height: 80vh;
+  border-radius: var(--radius-2);
+}
+
+#modal-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  border: 0;
+  border-radius: var(--radius-1);
+  padding: 6px 10px;
+  background: rgba(23, 26, 31, 0.85);
+  color: #e6e8ea;
+  cursor: pointer;
+}
+
+#modal-close:hover,
+#modal-close:focus-visible {
+  outline: 2px solid var(--color-focus);
+  background: rgba(31, 35, 43, 0.95);
+}
+
+.modal-actions{
+  width: 100%;
+  margin-top: var(--space-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-actions .btn-editor{
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-secondary);     
+  border: 1px solid var(--color-secondary);
+  color: #071b19;                           
+  border-radius: var(--radius-1);           
+  cursor: pointer;
+  transition: filter .15s ease;
+}
+.modal-actions .btn-editor:hover{
+  filter: brightness(.96);
+}

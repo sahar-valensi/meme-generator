@@ -1,0 +1,117 @@
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.gap-1 {
+  gap: var(--space-1);
+}
+
+.gap-2 {
+  gap: var(--space-2);
+}
+.gap-3 {
+  gap: var(--space-3);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.gap-5 {
+  gap: var(--space-5);
+}
+
+.gap-6 {
+  gap: var(--space-6);
+}
+
+.mt-1 {
+  margin-top: var(--space-2);
+}
+
+.mt-2 {
+  margin-top: var(--space-3);
+}
+
+.mt-3 {
+  margin-top: var(--space-4);
+}
+
+.mt-4 {
+  margin-top: var(--space-5);
+}
+
+.round-1 {
+  border-radius: var(--radius-1);
+}
+
+.round-2 {
+  border-radius: var(--radius-2);
+}
+
+.border {
+  border: 1px solid var(--color-border);
+}
+
+.surface-1 {
+  background: var(--color-surface-1);
+}
+
+.surface-2 {
+  background: var(--color-surface-2);
+}
+
+.text-center {
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+
+/* Color utilities*/
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-secondary {
+  color: var(--color-secondary);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+
+
+.bg-tint-primary {
+  background: linear-gradient(180deg, var(--tint-primary), transparent 40%);
+}
+
+.bg-tint-secondary {
+  background: linear-gradient(180deg, var(--tint-secondary), transparent 40%);
+}
+
+.bg-tint-accent {
+  background: linear-gradient(180deg, var(--tint-accent), transparent 40%);
+}
