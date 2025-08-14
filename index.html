@@ -10,9 +10,9 @@
       <nav class="nav container">
         <a class="logo" href="#home">Meme Generetor</a>
         <ul class="menu">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#editor">Create Meme</a></li>
-          <li><a href="#saved">Saved</a></li>
+          <li><a href="#home" onclick="onNav('home')">Home</a></li>
+          <li><a href="#editor" onclick="onNav('editor')">Create Meme</a></li>
+          <li><a href="#saved" onclick="onNav('saved')">Saved</a></li>
         </ul>
       </nav>
     </header>
@@ -168,9 +168,15 @@
               Share
             </button>
             <button class="btn" onclick="onDownload()">Download</button>
+            <button class="btn" onclick="onSaveMeme()">Save</button>
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="saved" class="saved-container" hidden>
+      <h1 class="visually-hidden">Saved</h1>
+      <div class="gallery-grid saved-grid"></div>
     </section>
 
     <dialog
@@ -199,6 +205,8 @@
     </footer>
 
     <script src="./js/services/meme.service.js"></script>
+    <script src="./js/services/localStorage.srvice.js"></script>
+    <script src="./js/galleryController.js"></script>
     <script src="./js/memeController.js"></script>
   </body>
 </html>

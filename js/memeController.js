@@ -20,32 +20,6 @@ function onInit() {
   renderGallery();
 }
 
-function renderGallery() {
-  var elGrid = document.querySelector(".gallery-grid");
-  if (!elGrid) return;
- var strHtml =
-  '<article class="card upload" onclick="onOpenUpload()">' +
-    '<div class="upload-inner">' +
-      '<span class="upload-icon" aria-hidden="true">📷</span>' +
-      '<span class="upload-text">Upload photo</span>' +
-    '</div>' +
-  '</article>';
-
-  var imgs = getImgs();
-  for (var i = 0; i < imgs.length; i++) {
-    var img = imgs[i];
-    strHtml +=
-      '<article class="card">' +
-      '<img src="' +
-      img.url +
-      '" alt="meme" data-id="' +
-      img.id +
-      '" onclick="onOpenPreview(this)">' +
-      "</article>";
-  }
-  elGrid.innerHTML = strHtml;
-}
-
 function renderMeme() {
   var meme = getMeme();
   if (!meme || !gElCanvas) return;
@@ -86,23 +60,6 @@ function renderMeme() {
     }
   };
   img.src = url;
-}
-
-function onOpenPreview(elImg) {
-  if (!elImg) return;
-  var id = +elImg.getAttribute("data-id");
-  if (id) setImg(id);
-
-  setCurrImgUrl(elImg.src);
-  modalImg.src = elImg.src;
-  modalImg.alt = elImg.alt || "";
-
-  modal.showModal();
-  if (btnClose && btnClose.focus) btnClose.focus();
-}
-
-function onClosePreview() {
-  modal.close();
 }
 
 function onOpenEditor() {
@@ -358,21 +315,31 @@ function onShareFacebook() {
 
   window.open(fbUrl, "_blank", "noopener,noreferrer,width=680,height=640");
 }
+/*SAVED */
 
-function onOpenUpload() {
-  var elInput = document.getElementById('file-input');
-  if (elInput) elInput.click();
+function onSaveMeme() {
+  if (!gElCanvas) return;
+  // renderMeme();
+
+  var dataUrl = gElCanvas.toDataURL("image/png");
+  if (typeof saveMemeDataUrl === "function") {
+    saveMemeDataUrl(dataUrl);
+  }
+  onNav("saved");
 }
 
-function onPickFile(ev) {
-  var file = ev.target && ev.target.files && ev.target.files[0];
-  if (!file) return;
+function onNav(view) {
+  showView(view);
+  if (view === "home" && typeof renderGallery === "function") renderGallery();
+  if (view === "saved" && typeof renderSaved === "function") renderSaved();
+}
 
-  var url = URL.createObjectURL(file);
+function showView(view) {
+  var elHome = document.getElementById("home");
+  var elEditor = document.getElementById("editor");
+  var elSaved = document.getElementById("saved");
 
-  var id = addUserImage(url);
-  setImg(id);
-  onOpenEditor();
-
-  ev.target.value = '';
+  if (elHome) elHome.hidden = view !== "home";
+  if (elEditor) elEditor.hidden = view !== "editor";
+  if (elSaved) elSaved.hidden = view !== "saved";
 }
