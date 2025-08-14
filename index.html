@@ -20,6 +20,14 @@
     <main id="home" class="check">
       <section class="gallery container">
         <h1 class="visually-hidden">Gallery</h1>
+        <input
+          id="file-input"
+          type="file"
+          accept="image/*"
+          capture="environment"
+          hidden
+          onchange="onPickFile(event)"
+        />
         <div class="gallery-grid">
           <!-- <article class="card">
             <img
@@ -156,7 +164,9 @@
             </button>
           </div>
           <div class="tool-actions">
-            <button class="btn btn-primary" onclick="onShareFacebook()">Share</button>
+            <button class="btn btn-primary" onclick="onShareFacebook()">
+              Share
+            </button>
             <button class="btn" onclick="onDownload()">Download</button>
           </div>
         </div>

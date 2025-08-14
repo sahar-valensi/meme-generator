@@ -236,3 +236,13 @@ function _syncFontSelect() {
   var elSel = document.querySelector(".tool-select");
   if (elSel) elSel.value = (line && line.font) || "Impact";
 }
+
+function addUserImage(url) {
+  var maxId = 0;
+  for (var i = 0; i < gImgs.length; i++) if (gImgs[i].id > maxId) maxId = gImgs[i].id;
+  var id = maxId + 1;
+
+  gImgs.push({ id: id, url: url, keywords: ['user'] });
+  return id;
+}
+

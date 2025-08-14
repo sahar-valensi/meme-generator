@@ -23,9 +23,15 @@ function onInit() {
 function renderGallery() {
   var elGrid = document.querySelector(".gallery-grid");
   if (!elGrid) return;
+ var strHtml =
+  '<article class="card upload" onclick="onOpenUpload()">' +
+    '<div class="upload-inner">' +
+      '<span class="upload-icon" aria-hidden="true">📷</span>' +
+      '<span class="upload-text">Upload photo</span>' +
+    '</div>' +
+  '</article>';
 
   var imgs = getImgs();
-  var strHtml = "";
   for (var i = 0; i < imgs.length; i++) {
     var img = imgs[i];
     strHtml +=
@@ -351,4 +357,22 @@ function onShareFacebook() {
   fbUrl += "&hashtag=" + encodeURIComponent("#MemeGenerator");
 
   window.open(fbUrl, "_blank", "noopener,noreferrer,width=680,height=640");
+}
+
+function onOpenUpload() {
+  var elInput = document.getElementById('file-input');
+  if (elInput) elInput.click();
+}
+
+function onPickFile(ev) {
+  var file = ev.target && ev.target.files && ev.target.files[0];
+  if (!file) return;
+
+  var url = URL.createObjectURL(file);
+
+  var id = addUserImage(url);
+  setImg(id);
+  onOpenEditor();
+
+  ev.target.value = '';
 }
